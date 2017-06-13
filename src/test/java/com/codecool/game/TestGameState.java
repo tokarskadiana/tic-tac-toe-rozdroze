@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestGameState {
+
     @Test
     public void testIfClassIsEnum() {
         assertTrue(GameState.class.isEnum());
