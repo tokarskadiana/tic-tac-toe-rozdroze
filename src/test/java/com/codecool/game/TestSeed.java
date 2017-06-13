@@ -26,6 +26,4 @@ public class TestSeed {
     public void CheckIfNoughtExists(){
         assertNotNull(Seed.valueOf("NOUGHT"));
     }
-
-
 }
