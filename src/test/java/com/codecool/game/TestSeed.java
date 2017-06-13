@@ -1,9 +1,10 @@
 package com.codecool.game;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.codecool.game.Seed;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestSeed {
 
@@ -13,17 +14,17 @@ public class TestSeed {
     }
 
     @Test
-    public void testIfEmptyExists(){
+    public void testIfEmptyExists() {
         assertNotNull(Seed.valueOf("EMPTY"));
     }
 
     @Test
-    public void testIfCrossExists(){
+    public void testIfCrossExists() {
         assertNotNull(Seed.valueOf("CROSS"));
     }
 
     @Test
-    public void testIfNoughtExists(){
+    public void testIfNoughtExists() {
         assertNotNull(Seed.valueOf("NOUGHT"));
     }
 }
