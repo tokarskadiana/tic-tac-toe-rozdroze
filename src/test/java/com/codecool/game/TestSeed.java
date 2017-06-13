@@ -8,22 +8,22 @@ import com.codecool.game.Seed;
 public class TestSeed {
 
     @Test
-    public void checkIfClassTypeIsEnum() {
+    public void testIfClassTypeIsEnum() {
         assertTrue(Seed.class.isEnum());
     }
 
     @Test
-    public void CheckIfEmptyExists(){
+    public void testIfEmptyExists(){
         assertNotNull(Seed.valueOf("EMPTY"));
     }
 
     @Test
-    public void CheckIfCrossExists(){
+    public void testIfCrossExists(){
         assertNotNull(Seed.valueOf("CROSS"));
     }
 
     @Test
-    public void CheckIfNoughtExists(){
+    public void testIfNoughtExists(){
         assertNotNull(Seed.valueOf("NOUGHT"));
     }
 }
