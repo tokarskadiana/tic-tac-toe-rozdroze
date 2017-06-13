@@ -22,11 +22,12 @@ class TestCell {
     @Test
     public void testIfSetContentSetsNewValue() {
         cell.setContent(Seed.CROSS);
-        assertEquals(Seed.EMPTY, cell.getContent());
+        assertEquals(Seed.CROSS, cell.getContent());
     }
 
     @Test
     public void testClearMethodSetContentToEmpty() {
+        cell.setContent(Seed.CROSS);
         cell.clear();
         assertEquals(Seed.EMPTY, cell.getContent());
     }
