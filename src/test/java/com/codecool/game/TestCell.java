@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestCell {
 
-    Cell cell;
+    private Cell cell;
 
     @BeforeEach
     public void setup() {
