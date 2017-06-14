@@ -13,6 +13,13 @@ import static org.mockito.Mockito.when;
 
 class TestBoard {
     private Cell[][] cells;
+    private Board board;
+
+    @BeforeEach
+    void setUp() {
+        board = new Board();
+        board.init();
+    }
 
     @Nested
     @DisplayName("Test init method")
@@ -20,14 +27,13 @@ class TestBoard {
 
         @BeforeEach
         public void setup() {
-            Board board = new Board();
-            board.init();
             cells = board.getCells();
         }
 
         @Test
         public void testCellsIsNullBeforeInit() {
             Board board = new Board();
+            Cell[][] cells = board.getCells();
             assertNull(cells);
         }
 
@@ -68,6 +74,7 @@ class TestBoard {
             Cell[][] cells = {row, row, row};
             when(cell.getContent())
                     .thenReturn(Seed.CROSS);
+
         }
 
         @DisplayName("every cell in row must be CROSS if CROSS wins in row")
