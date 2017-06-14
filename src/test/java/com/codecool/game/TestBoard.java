@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TestBoard {
     private Cell[][] cells;
@@ -53,19 +54,43 @@ class TestBoard {
 
         @BeforeEach
         public void setUp() {
+            cell = mock(Cell.class);
+            Cell[] row = {cell, cell, cell};
+            Cell[][] cells = {row, row, row};
+            when(cell.getContent())
+                    .thenReturn(Seed.CROSS)
+                    .thenReturn(Seed.NOUGHT);
+            cells[0][0] = cell;
+            cells[0][1] = cell;
+            cells[0][2] = cell;
+            cells[1][0] = cell;
+            cells[1][1] = cell;
+            cells[1][1] = cell;
+            cells[2][0] = cell;
+            cells[2][1] = cell;
+            cells[2][2] = cell;
+        }
+
+        @DisplayName("isDraw must return true")
+        @Test
+        public void testIfIsDrawReturnsTrue() {
             assertTrue(isDraw());
         }
 
         @DisplayName("hasWon for CROSS must return false")
         @Test
         public void testIfCrossHasWonReturnsFalse() {
-            assertFalse(hasWon(Seed.CROSS));
+            when(cell.getContent())
+                    .thenReturn(Seed.CROSS);
+            assertFalse(hasWon(cell));
         }
 
         @DisplayName("hasWon for NOUGHT must return false")
         @Test
         public void testIfNoughtHasWonReturnsFalse() {
-            assertFalse(hasWon(Seed.NOUGHT));
+            when(cell.getContent())
+                    .thenReturn(Seed.NOUGHT);
+            assertFalse(hasWon(cell));
         }
 
         @DisplayName("every cell must be NOT empty")
