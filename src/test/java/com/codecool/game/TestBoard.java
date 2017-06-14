@@ -36,9 +36,7 @@ class TestBoard {
             cells[1][0] = cell;
             cells[1][1] = cell;
             cells[1][2] = cell;
-            for (Cell cell : cells[cell.getRow()]) {
-                assertEquals(Seed.CROSS, cell.getContent());
-            }
+            assertTrue(hasWon(cell));
         }
 
         @DisplayName("every cell in column must be CROSS if CROSS wins in column")
@@ -47,9 +45,16 @@ class TestBoard {
             cells[0][2] = cell;
             cells[1][2] = cell;
             cells[2][2] = cell;
-            for (int row = 0; row < 3; row++) {
-                assertEquals(Seed.CROSS, cells[row][cell.getCol()].getContent());
-            }
+            assertTrue(hasWon(cell));
+        }
+
+        @DisplayName("every cell diagonally must be CROSS if CROSS wins diagonally")
+        @Test
+        public void testIfCrossHasWonDiagonally() {
+            cells[0][2] = cell;
+            cells[1][1] = cell;
+            cells[2][0] = cell;
+            assertTrue(hasWon(cell));
         }
     }
 
@@ -98,11 +103,6 @@ class TestBoard {
         @DisplayName("every cell must be NOT empty")
         @Test
         public void testIfEveryCellIsNOTEmpty() {
-            for (int i = 0; i < cells.length; i++) {
-                for (int j = 0; j < cells[i].length; j++) {
-                    assertNotEquals("Seed.EMPTY", cells[i][j].getContent());
-                }
-            }
             for (Cell[] row : cells) {
                 for (Cell cell : row) {
                     assertNotEquals("Seed.EMPTY", cell.getContent());
