@@ -83,7 +83,7 @@ class TestBoard {
             cells[1][0] = cell;
             cells[1][1] = cell;
             cells[1][2] = cell;
-            assertTrue(hasWon(cell));
+            assertTrue(board.hasWon(cell));
         }
 
         @DisplayName("every cell in column must be CROSS if CROSS wins in column")
@@ -92,7 +92,7 @@ class TestBoard {
             cells[0][2] = cell;
             cells[1][2] = cell;
             cells[2][2] = cell;
-            assertTrue(hasWon(cell));
+            assertTrue(board.hasWon(cell));
         }
 
         @DisplayName("every cell diagonally must be CROSS if CROSS wins diagonally")
@@ -101,7 +101,7 @@ class TestBoard {
             cells[0][2] = cell;
             cells[1][1] = cell;
             cells[2][0] = cell;
-            assertTrue(hasWon(cell));
+            assertTrue(board.hasWon(cell));
         }
     }
 
@@ -132,7 +132,7 @@ class TestBoard {
         @DisplayName("isDraw must return true")
         @Test
         public void testIfIsDrawReturnsTrue() {
-            assertTrue(isDraw());
+            assertTrue(board.isDraw());
         }
 
         @DisplayName("hasWon for CROSS must return false")
@@ -140,7 +140,7 @@ class TestBoard {
         public void testIfCrossHasWonReturnsFalse() {
             when(cell.getContent())
                     .thenReturn(Seed.CROSS);
-            assertFalse(hasWon(cell));
+            assertFalse(board.hasWon(cell));
         }
 
         @DisplayName("hasWon for NOUGHT must return false")
@@ -148,7 +148,7 @@ class TestBoard {
         public void testIfNoughtHasWonReturnsFalse() {
             when(cell.getContent())
                     .thenReturn(Seed.NOUGHT);
-            assertFalse(hasWon(cell));
+            assertFalse(board.hasWon(cell));
         }
 
         @DisplayName("every cell must be NOT empty")
