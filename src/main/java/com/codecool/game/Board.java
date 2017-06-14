@@ -29,12 +29,35 @@ public class Board {
     public boolean hasWon(Cell cell) {
         boolean hasWon = checkRow(cell);
         if(!hasWon) hasWon = checkCol(cell);
-        if(!hasWon) hasWon = checkDiagonal(cell);
+        if((!hasWon || cell.getRow() == cell.getCol()) ||
+                (cell.getCol() == -1 * cell.getRow() + (cells.length-1))) {
+            hasWon = checkDiagonal(cell);
+        }
         return hasWon;
+    }
+
+    public boolean isDraw() {
+        boolean isDraw = true;
+        for (int i = 0; i < cells.length; i++) {
+            if (!isDraw) break;
+            for (int j = 0; j < cells[i].length; j++) {
+                if (cells[i][j].getContent() == Seed.EMPTY) {
+                    isDraw = false;
+                    break;
+                }
+            }
+        }
+        return isDraw;
     }
 
     private boolean checkDiagonal(Cell cell) {
         boolean hasWon = true;
+        for(int n = 0; n < cells.length; n++){
+            if(cells[n][n].getContent() != cell.getContent()) hasWon = false;
+            if(cells[n][-1*n+(cells.length-1)].getContent() != cell.getContent()){
+                hasWon = false;
+            }
+        }
         return hasWon;
     }
 
@@ -62,19 +85,5 @@ public class Board {
             }
         }
         return hasWon;
-    }
-
-    public boolean isDraw() {
-        boolean isDraw = true;
-        for (int i = 0; i < cells.length; i++) {
-            if (!isDraw) break;
-            for (int j = 0; j < cells[i].length; j++) {
-                if (cells[i][j].getContent() == Seed.EMPTY) {
-                    isDraw = false;
-                    break;
-                }
-            }
-        }
-        return isDraw;
     }
 }
