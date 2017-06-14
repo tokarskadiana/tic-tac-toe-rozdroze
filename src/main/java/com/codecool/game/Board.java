@@ -48,23 +48,15 @@ public class Board {
 
     private boolean checkDiagonal(Cell cell) {
         boolean hasWon = true;
+        boolean diagonal1 = true;
+        boolean diagonal2 = true;
         for(int n = 0; n < getCells().length; n++){
-            if(getCells()[n][n].getContent() != cell.getContent()) hasWon = false;
+            if(getCells()[n][n].getContent() != cell.getContent()) diagonal1 = false;
             if(getCells()[n][-1*n+(getCells().length-1)].getContent() != cell.getContent()){
-                hasWon = false;
+                diagonal2 = false;
             }
         }
-        return hasWon;
-    }
-
-    public void setCellByUserMove(Cell cell) {
-        for (int i = 0; i < getCells().length; i++) {
-            for (int j = 0; j < getCells()[i].length; j++) {
-                if (i == cell.getRow() && j == cell.getCol()) {
-                    getCells()[i][j].setContent(cell.getContent());
-                }
-            }
-        }
+        return (diagonal1 || diagonal2);
     }
 
     private boolean checkCol(Cell cell) {
