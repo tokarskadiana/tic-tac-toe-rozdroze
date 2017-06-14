@@ -50,6 +50,19 @@ public class Board {
         return isDraw;
     }
 
+    public Cell setCellByUserMove(Seed seed, int row, int col) {
+        Cell cell = null;
+        for (int i = 0; i < getCells().length; i++) {
+            for (int j = 0; j < getCells()[i].length; j++) {
+                if (i == row && j == col) {
+                    getCells()[i][j].setContent(seed);
+                    cell = getCells()[i][j];
+                }
+            }
+        }
+        return  cell;
+    }
+
     private boolean checkDiagonal(Cell cell) {
         boolean hasWon = true;
         for(int n = 0; n < getCells().length; n++){
