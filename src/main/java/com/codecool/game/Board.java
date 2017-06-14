@@ -30,7 +30,7 @@ public class Board {
         boolean hasWon = checkRow(cell);
         if(!hasWon) hasWon = checkCol(cell);
         if((!hasWon || cell.getRow() == cell.getCol()) ||
-                (cell.getCol() == -1 * cell.getRow() + (cells.length-1))) {
+                (cell.getCol() == -1 * cell.getRow() + (getCells().length-1))) {
             hasWon = checkDiagonal(cell);
         }
         return hasWon;
@@ -38,10 +38,10 @@ public class Board {
 
     public boolean isDraw() {
         boolean isDraw = true;
-        for (int i = 0; i < cells.length; i++) {
+        for (int i = 0; i < getCells().length; i++) {
             if (!isDraw) break;
-            for (int j = 0; j < cells[i].length; j++) {
-                if (cells[i][j].getContent() == Seed.EMPTY) {
+            for (int j = 0; j < getCells()[i].length; j++) {
+                if (getCells()[i][j].getContent() == Seed.EMPTY) {
                     isDraw = false;
                     break;
                 }
@@ -52,9 +52,9 @@ public class Board {
 
     private boolean checkDiagonal(Cell cell) {
         boolean hasWon = true;
-        for(int n = 0; n < cells.length; n++){
-            if(cells[n][n].getContent() != cell.getContent()) hasWon = false;
-            if(cells[n][-1*n+(cells.length-1)].getContent() != cell.getContent()){
+        for(int n = 0; n < getCells().length; n++){
+            if(getCells()[n][n].getContent() != cell.getContent()) hasWon = false;
+            if(getCells()[n][-1*n+(getCells().length-1)].getContent() != cell.getContent()){
                 hasWon = false;
             }
         }
@@ -65,8 +65,8 @@ public class Board {
         boolean hasWon = true;
         int col = cell.getCol();
         Seed cellContent = cell.getContent();
-        for (int row = 0; row < cells.length; row++) {
-            if (cells[row][col].getContent() != cellContent) {
+        for (int row = 0; row < getCells().length; row++) {
+            if (getCells()[row][col].getContent() != cellContent) {
                 hasWon = false;
                 break;
             }
@@ -78,8 +78,8 @@ public class Board {
         boolean hasWon = true;
         int row = cell.getRow();
         Seed cellContent = cell.getContent();
-        for (int col = 0; col < cells[row].length; col++) {
-            if (cells[row][col].getContent() != cellContent) {
+        for (int col = 0; col < getCells()[row].length; col++) {
+            if (getCells()[row][col].getContent() != cellContent) {
                 hasWon = false;
                 break;
             }
