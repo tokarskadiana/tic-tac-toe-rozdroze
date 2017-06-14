@@ -21,16 +21,21 @@ class TestBoard {
     }
 
     @Nested
-    @DisplayName("when CROSS has won")
-    class WhenCrossHasWon {
+    @DisplayName("when CROSS has won in row")
+    class WhenCrossHasWonInRow {
+
         @BeforeEach
         public void setUp() {
-            assertTrue(hasWon(cell));
+            when(cell.getContent())
+                    .thenReturn(Seed.CROSS);
         }
 
         @DisplayName("every cell in row must be CROSS if CROSS wins in row")
         @Test
         public void testIfCrossHasWonInRow() {
+            cells[1][0] = cell;
+            cells[1][1] = cell;
+            cells[1][2] = cell;
             for (Cell cell : cells[cell.getRow()]) {
                 assertEquals(Seed.CROSS, cell.getContent());
             }
@@ -39,9 +44,9 @@ class TestBoard {
         @DisplayName("every cell in column must be CROSS if CROSS wins in column")
         @Test
         public void testIfCrossHasWonInColumn() {
-            for (Cell cell : cells[cell.getRow()]) {
-                assertEquals(Seed.CROSS, cell.getContent());
-            }
+            cells[0][2] = cell;
+            cells[1][2] = cell;
+            cells[2][2] = cell;
             for (int row = 0; row < 3; row++) {
                 assertEquals(Seed.CROSS, cells[row][cell.getCol()].getContent());
             }
@@ -54,9 +59,6 @@ class TestBoard {
 
         @BeforeEach
         public void setUp() {
-            cell = mock(Cell.class);
-            Cell[] row = {cell, cell, cell};
-            Cell[][] cells = {row, row, row};
             when(cell.getContent())
                     .thenReturn(Seed.CROSS)
                     .thenReturn(Seed.NOUGHT);
