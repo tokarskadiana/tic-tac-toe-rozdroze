@@ -22,4 +22,12 @@ public class Cell {
     public void clear() {
         setContent(Seed.EMPTY);
     }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
 }

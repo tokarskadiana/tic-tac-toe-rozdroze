@@ -5,27 +5,67 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class TestBoard {
     private Cell[][] cells;
-    private Cell cell;
 
-    @BeforeEach
-    public void setUp() {
-        cell = mock(Cell.class);
-        Cell[] row = {cell, cell, cell};
-        Cell[][] cells = {row, row, row};
+    @Nested
+    @DisplayName("Test init method")
+    class TestInitMethod {
+
+        @BeforeEach
+        public void setup() {
+            Board board = new Board();
+            board.init();
+            cells = board.getCells();
+        }
+
+        @Test
+        public void testCellsIsNullBeforeInit() {
+            Board board = new Board();
+            assertNull(cells);
+        }
+
+        @Test
+        public void testInitCreateCellsArray() {
+            Cell cell = mock(Cell.class);
+            Cell[] row = {cell, cell, cell};
+            Cell[][] mockedCells = {row, row, row};
+            assertTrue(Arrays.equals(mockedCells, cells));
+        }
+
+        @Test
+        public void testEveryCellHasCorrectCoordinates() {
+            for (int i = 0; i < cells.length; i++) {
+                for (int j = 0; j < cells[i].length; j++) {
+                    assertCoordinatesAreEquals(i + 1, cells[i][j].getRow(),
+                            j + 1, cells[i][j].getCol());
+                }
+            }
+        }
+
+        private void assertCoordinatesAreEquals(int expectedRow, int expectedCol,
+                                                int actualRow, int actualCol) {
+            assertEquals(expectedRow, actualRow);
+            assertEquals(expectedCol, actualCol);
+        }
     }
 
     @Nested
     @DisplayName("when CROSS has won in row")
     class WhenCrossHasWonInRow {
+        private Cell cell;
 
         @BeforeEach
         public void setUp() {
+            cell = mock(Cell.class);
+            Cell[] row = {cell, cell, cell};
+            Cell[][] cells = {row, row, row};
             when(cell.getContent())
                     .thenReturn(Seed.CROSS);
         }
@@ -61,9 +101,13 @@ class TestBoard {
     @Nested
     @DisplayName("when there is a tie")
     class WhenThereIsATie {
+        private Cell cell;
 
         @BeforeEach
         public void setUp() {
+            cell = mock(Cell.class);
+            Cell[] row = {cell, cell, cell};
+            Cell[][] cells = {row, row, row};
             when(cell.getContent())
                     .thenReturn(Seed.CROSS)
                     .thenReturn(Seed.NOUGHT);

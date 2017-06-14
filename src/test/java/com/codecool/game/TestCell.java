@@ -11,7 +11,7 @@ class TestCell {
 
     @BeforeEach
     public void setup() {
-        cell = new Cell(1, 1);
+        cell = new Cell(1, 3);
     }
 
     @Test
@@ -30,5 +30,15 @@ class TestCell {
         cell.setContent(Seed.CROSS);
         cell.clear();
         assertEquals(Seed.EMPTY, cell.getContent());
+    }
+
+    @Test
+    public void testGetRowReturnActualValue() {
+        assertEquals(1, cell.getRow());
+    }
+
+    @Test
+    public void testGetColReturnActualValue() {
+        assertEquals(3, cell.getCol());
     }
 }
