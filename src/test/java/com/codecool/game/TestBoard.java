@@ -62,37 +62,71 @@ class TestBoard {
         @BeforeEach
         public void setUp() {
             cell = mock(Cell.class);
-            Cell[] row = {cell, cell, cell};
-            Cell[][] cells = {row, row, row};
-            when(cell.getContent())
-                    .thenReturn(Seed.CROSS);
-
+            when(cell.getRow()).thenReturn(1);
+            when(cell.getCol()).thenReturn(1);
+            when(cell.getContent()).thenReturn(Seed.CROSS);
         }
 
         @DisplayName("every cell in row must be CROSS if CROSS wins in row")
         @Test
         public void testIfCrossHasWonInRow() {
-            cells[1][0] = cell;
-            cells[1][1] = cell;
-            cells[1][2] = cell;
+            Cell[][] cells = new Cell[3][3];
+            for (int i = 0; i < cells.length; i++) {
+                for (int j = 0; j < cells[i].length; j++) {
+                    Cell c = mock(Cell.class);
+                    cells[i][j] = c;
+                    when(c.getRow()).thenReturn(i);
+                    when(c.getCol()).thenReturn(j);
+                    if ((i==1&&j==0)||(i==1&&j==1)||(i==1&&j==2)){
+                        when(c.getContent()).thenReturn(Seed.CROSS);
+                    } else {
+                        when(c.getContent()).thenReturn(Seed.EMPTY);
+                    }
+                }
+            }
+            board.init(cells);
             assertTrue(board.hasWon(cell));
         }
 
         @DisplayName("every cell in column must be CROSS if CROSS wins in column")
         @Test
         public void testIfCrossHasWonInColumn() {
-            cells[0][2] = cell;
-            cells[1][2] = cell;
-            cells[2][2] = cell;
+            Cell[][] cells = new Cell[3][3];
+            for (int i = 0; i < cells.length; i++) {
+                for (int j = 0; j < cells[i].length; j++) {
+                    Cell c = mock(Cell.class);
+                    cells[i][j] = c;
+                    when(c.getRow()).thenReturn(i);
+                    when(c.getCol()).thenReturn(j);
+                    if ((i==0&&j==1)||(i==1&&j==1)||(i==2&&j==1)){
+                        when(c.getContent()).thenReturn(Seed.CROSS);
+                    } else {
+                        when(c.getContent()).thenReturn(Seed.EMPTY);
+                    }
+                }
+            }
+            board.init(cells);
             assertTrue(board.hasWon(cell));
         }
 
         @DisplayName("every cell diagonally must be CROSS if CROSS wins diagonally")
         @Test
         public void testIfCrossHasWonDiagonally() {
-            cells[0][2] = cell;
-            cells[1][1] = cell;
-            cells[2][0] = cell;
+            Cell[][] cells = new Cell[3][3];
+            for (int i = 0; i < cells.length; i++) {
+                for (int j = 0; j < cells[i].length; j++) {
+                    Cell c = mock(Cell.class);
+                    cells[i][j] = c;
+                    when(c.getRow()).thenReturn(i);
+                    when(c.getCol()).thenReturn(j);
+                    if ((i==0&&j==0)||(i==1&&j==1)||(i==2&&j==2)){
+                        when(c.getContent()).thenReturn(Seed.CROSS);
+                    } else {
+                        when(c.getContent()).thenReturn(Seed.EMPTY);
+                    }
+                }
+            }
+            board.init(cells);
             assertTrue(board.hasWon(cell));
         }
     }
@@ -100,25 +134,25 @@ class TestBoard {
     @Nested
     @DisplayName("when there is a tie")
     class WhenThereIsATie {
-        private Cell cell;
+        private Cell[][] cells;
 
         @BeforeEach
         public void setUp() {
-            cell = mock(Cell.class);
-            Cell[] row = {cell, cell, cell};
-            Cell[][] cells = {row, row, row};
-            when(cell.getContent())
-                    .thenReturn(Seed.CROSS)
-                    .thenReturn(Seed.NOUGHT);
-            cells[0][0] = cell;
-            cells[0][1] = cell;
-            cells[0][2] = cell;
-            cells[1][0] = cell;
-            cells[1][1] = cell;
-            cells[1][1] = cell;
-            cells[2][0] = cell;
-            cells[2][1] = cell;
-            cells[2][2] = cell;
+            cells = new Cell[3][3];
+            for (int i = 0; i < cells.length; i++) {
+                for (int j = 0; j < cells[i].length; j++) {
+                    Cell c = mock(Cell.class);
+                    cells[i][j] = c;
+                    when(c.getRow()).thenReturn(i);
+                    when(c.getCol()).thenReturn(j);
+                    if ((i==0&&j==2)||(i==1&&j==0)||(i==2&&j==1)||(i==2&&j==2)){
+                        when(c.getContent()).thenReturn(Seed.NOUGHT);
+                    } else {
+                        when(c.getContent()).thenReturn(Seed.CROSS);
+                    }
+                }
+            }
+            board.init(cells);
         }
 
         @DisplayName("isDraw must return true")
@@ -130,25 +164,21 @@ class TestBoard {
         @DisplayName("hasWon for CROSS must return false")
         @Test
         public void testIfCrossHasWonReturnsFalse() {
-            when(cell.getContent())
-                    .thenReturn(Seed.CROSS);
-            assertFalse(board.hasWon(cell));
+            assertFalse(board.hasWon(cells[1][1]));
         }
 
         @DisplayName("hasWon for NOUGHT must return false")
         @Test
         public void testIfNoughtHasWonReturnsFalse() {
-            when(cell.getContent())
-                    .thenReturn(Seed.NOUGHT);
-            assertFalse(board.hasWon(cell));
+            assertFalse(board.hasWon(cells[0][2]));
         }
 
         @DisplayName("every cell must be NOT empty")
         @Test
         public void testIfEveryCellIsNOTEmpty() {
-            for (Cell[] row : cells) {
+            for (Cell[] row : board.getCells()) {
                 for (Cell cell : row) {
-                    assertNotEquals("Seed.EMPTY", cell.getContent());
+                    assertNotEquals(Seed.EMPTY, cell.getContent());
                 }
             }
         }

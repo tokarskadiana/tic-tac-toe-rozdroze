@@ -22,6 +22,10 @@ public class Board {
         cells = new Cell[][]{firstRow, secondRow, thirdRow};
     }
 
+    public void init(Cell[][] cells) {
+        this.cells = cells;
+    }
+
     public Cell[][] getCells() {
         return cells;
     }
@@ -29,9 +33,9 @@ public class Board {
     public boolean hasWon(Cell cell) {
         boolean hasWon = checkRow(cell);
         if(!hasWon) hasWon = checkCol(cell);
-        if((!hasWon || cell.getRow() == cell.getCol()) ||
-                (cell.getCol() == -1 * cell.getRow() + (getCells().length-1))) {
-            hasWon = checkDiagonal(cell);
+        if(!hasWon) {
+            if((cell.getRow() == cell.getCol()) ||
+                    (cell.getCol() == -1 * cell.getRow() + (getCells().length-1))) hasWon = checkDiagonal(cell);
         }
         return hasWon;
     }
@@ -50,19 +54,6 @@ public class Board {
         return isDraw;
     }
 
-    public Cell setCellByUserMove(Seed seed, int row, int col) {
-        Cell cell = null;
-        for (int i = 0; i < getCells().length; i++) {
-            for (int j = 0; j < getCells()[i].length; j++) {
-                if (i == row && j == col) {
-                    getCells()[i][j].setContent(seed);
-                    cell = getCells()[i][j];
-                }
-            }
-        }
-        return  cell;
-    }
-
     private boolean checkDiagonal(Cell cell) {
         boolean hasWon = true;
         for(int n = 0; n < getCells().length; n++){
@@ -72,6 +63,16 @@ public class Board {
             }
         }
         return hasWon;
+    }
+
+    public void setCellByUserMove(Cell cell) {
+        for (int i = 0; i < getCells().length; i++) {
+            for (int j = 0; j < getCells()[i].length; j++) {
+                if (i == cell.getRow() && j == cell.getCol()) {
+                    getCells()[i][j].setContent(cell.getContent());
+                }
+            }
+        }
     }
 
     private boolean checkCol(Cell cell) {
@@ -94,7 +95,6 @@ public class Board {
         for (int col = 0; col < getCells()[row].length; col++) {
             if (getCells()[row][col].getContent() != cellContent) {
                 hasWon = false;
-                break;
             }
         }
         return hasWon;
