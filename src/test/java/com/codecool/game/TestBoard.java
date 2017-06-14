@@ -38,19 +38,11 @@ class TestBoard {
         }
 
         @Test
-        public void testInitCreateCellsArray() {
-            Cell cell = mock(Cell.class);
-            Cell[] row = {cell, cell, cell};
-            Cell[][] mockedCells = {row, row, row};
-            assertTrue(Arrays.equals(mockedCells, cells));
-        }
-
-        @Test
         public void testEveryCellHasCorrectCoordinates() {
             for (int i = 0; i < cells.length; i++) {
                 for (int j = 0; j < cells[i].length; j++) {
-                    assertCoordinatesAreEquals(i + 1, cells[i][j].getRow(),
-                            j + 1, cells[i][j].getCol());
+                    assertCoordinatesAreEquals(i, j,
+                            cells[i][j].getRow(), cells[i][j].getCol());
                 }
             }
         }
