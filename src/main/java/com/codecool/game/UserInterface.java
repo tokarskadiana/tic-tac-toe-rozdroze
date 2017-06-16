@@ -40,15 +40,12 @@ public class UserInterface {
         System.out.println(String.format(sb.toString()));
     }
 
-    public int[] getUserMove() {
+    public String getUserMove() {
         System.out.println(
                 String.format("Player '%s', enter your move (row[1-3], column[1-3]): ",
                         seedAsString.get(game.getCurrentPlayer())));
         String userMove = new Scanner(System.in).nextLine().replaceAll("\\s", "");
-        String[] tmp = userMove.split("");
-        int row = Integer.valueOf(tmp[0]) - 1;  // one-based system
-        int col = Integer.valueOf(tmp[1]) - 1;
-        return new int[]{row, col};
+        return userMove;
     }
 
     private Map<Seed, String> seedsToSting() {

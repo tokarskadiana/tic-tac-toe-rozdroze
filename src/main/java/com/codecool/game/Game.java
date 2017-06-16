@@ -17,7 +17,7 @@ public class Game {
         currentPlayer = chooseRandomPlayer();
     }
 
-    public void updateGameState(Seed seed, int row, int col) {
+    public void updateGameState(Seed seed, int row, int col) throws IllegalArgumentException {
         Cell cell = board.applyUserMove(seed, row, col);
         if (board.hasWon(cell)) {
             if (seed == Seed.CROSS) setCurrentState(GameState.CROSS_WON);
@@ -44,6 +44,18 @@ public class Game {
         } else {
             this.currentPlayer = Seed.CROSS;
         }
+    }
+
+    public int[] validateUserMove (String userInput) throws IllegalArgumentException {
+        if (userInput.matches("^\\d{2}$")) {
+            String[] tmp = userInput.split("");
+            int row = Integer.valueOf(tmp[0]) - 1;  // one-based system
+            int col = Integer.valueOf(tmp[1]) - 1;
+            if (row >= 0 && row < 3 && col >= 0 && col < 3) {
+                return new int[]{row, col};
+            }
+        }
+        throw new IllegalArgumentException("Wrong input. Try again! :)");
     }
 
     private void setCurrentState(GameState currentState) {

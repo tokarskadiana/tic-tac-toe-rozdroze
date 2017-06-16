@@ -84,10 +84,11 @@ public class Board {
         return hasWon;
     }
 
-    public Cell applyUserMove(Seed seed, int row, int col) {
-        Cell cell = null;
-        //create validation here
-        cell = cells[row][col];
+    public Cell applyUserMove(Seed seed, int row, int col) throws IllegalArgumentException {
+        Cell cell = cells[row][col];
+        if (cell.getContent() != Seed.EMPTY) {
+            throw new IllegalArgumentException("Place's been already taken!");
+        }
         cell.setContent(seed);
         return cell;
     }

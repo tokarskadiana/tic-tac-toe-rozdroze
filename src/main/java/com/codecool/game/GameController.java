@@ -15,8 +15,21 @@ public class GameController {
         ui.displayFirstPlayer();
         do {
             ui.printBoard();
-            int[] userMove = ui.getUserMove();
-            game.updateGameState(game.getCurrentPlayer(), userMove[0], userMove[1]);
+            int[] userMove = new int[0];
+            boolean isValidInput = false;
+            do {
+                try {
+                    userMove = game.validateUserMove(ui.getUserMove());
+                    isValidInput = true;
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
+            } while (!isValidInput);
+            try {
+                game.updateGameState(game.getCurrentPlayer(), userMove[0], userMove[1]);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         } while (game.getCurrentState() == GameState.PLAYING);
         ui.printBoard();
         ui.displayWinner(game.getCurrentPlayer());
