@@ -46,8 +46,8 @@ public class UserInterface {
                         seedAsString.get(game.getCurrentPlayer())));
         String userMove = new Scanner(System.in).nextLine().replaceAll("\\s", "");
         String[] tmp = userMove.split("");
-        int row = Integer.valueOf(tmp[0]);
-        int col = Integer.valueOf(tmp[1]);
+        int row = Integer.valueOf(tmp[0]) - 1;  // one-based system
+        int col = Integer.valueOf(tmp[1]) - 1;
         return new int[]{row, col};
     }
 
