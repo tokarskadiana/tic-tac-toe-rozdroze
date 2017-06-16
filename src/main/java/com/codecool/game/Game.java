@@ -23,7 +23,7 @@ public class Game {
 
     public void updateGameState(Seed seed, int row, int col) {
         Cell cell = board.applyUserMove(seed, row, col);
-        if (board.hasWon(cell)){
+        if (board.hasWon(cell)) {
             if (seed == Seed.CROSS) setCurrentState(GameState.CROSS_WON);
             else if (seed == Seed.NOUGHT) setCurrentState(GameState.NOUGHT_WON);
         } else if (board.isDraw()) setCurrentState(GameState.DRAW);

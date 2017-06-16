@@ -24,10 +24,10 @@ public class Board {
 
     public boolean hasWon(Cell cell) {
         boolean hasWon = checkRow(cell);
-        if(!hasWon) hasWon = checkCol(cell);
-        if(!hasWon) {
-            if((cell.getRow() == cell.getCol()) ||
-                    (cell.getCol() == -1 * cell.getRow() + (getCells().length-1))) hasWon = checkDiagonal(cell);
+        if (!hasWon) hasWon = checkCol(cell);
+        if (!hasWon) {
+            if ((cell.getRow() == cell.getCol()) ||
+                    (cell.getCol() == -1 * cell.getRow() + (getCells().length - 1))) hasWon = checkDiagonal(cell);
         }
         return hasWon;
     }
@@ -50,9 +50,9 @@ public class Board {
         boolean hasWon = true;
         boolean diagonal1 = true;
         boolean diagonal2 = true;
-        for(int n = 0; n < getCells().length; n++){
-            if(getCells()[n][n].getContent() != cell.getContent()) diagonal1 = false;
-            if(getCells()[n][-1*n+(getCells().length-1)].getContent() != cell.getContent()){
+        for (int n = 0; n < getCells().length; n++) {
+            if (getCells()[n][n].getContent() != cell.getContent()) diagonal1 = false;
+            if (getCells()[n][-1 * n + (getCells().length - 1)].getContent() != cell.getContent()) {
                 diagonal2 = false;
             }
         }
