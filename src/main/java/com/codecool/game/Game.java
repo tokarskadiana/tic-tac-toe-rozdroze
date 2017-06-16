@@ -17,12 +17,17 @@ public class Game {
         currentPlayer = choseRandomPlayer();
     }
 
-    public void updateGameState(Seed seed, int row, int col) {
+    private void setCurrentState(GameState currentState) {
+        this.currentState = currentState;
     }
 
-    private Seed choseRandomPlayer() {
-        List<Seed> seeds = Arrays.asList(Seed.CROSS, Seed.NOUGHT);
-        return seeds.get(new Random().nextInt(seeds.size()));
+    public void updateGameState(Seed seed, int row, int col) {
+        Cell cell = board.applyUserMove(seed, row, col);
+        if (board.hasWon(cell)){
+            if (seed == Seed.CROSS) setCurrentState(GameState.CROSS_WON);
+            else if (seed == Seed.NOUGHT) setCurrentState(GameState.NOUGHT_WON);
+        } else if (board.isDraw()) setCurrentState(GameState.DRAW);
+        else setCurrentPlayer();
     }
 
     public Seed getCurrentPlayer() {
@@ -31,5 +36,22 @@ public class Game {
 
     public GameState getCurrentState() {
         return currentState;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setCurrentPlayer() {
+        if (getCurrentPlayer() == Seed.CROSS) {
+            this.currentPlayer = Seed.NOUGHT;
+        } else {
+            this.currentPlayer = Seed.CROSS;
+        }
+    }
+
+    private Seed choseRandomPlayer() {
+        List<Seed> seeds = Arrays.asList(Seed.CROSS, Seed.NOUGHT);
+        return seeds.get(new Random().nextInt(seeds.size()));
     }
 }
