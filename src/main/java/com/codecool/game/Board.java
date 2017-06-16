@@ -83,4 +83,12 @@ public class Board {
         }
         return hasWon;
     }
+
+    public Cell applyUserMove(Seed seed, int row, int col) {
+        Cell cell = null;
+        //create validation here
+        cell = cells[row][col];
+        cell.setContent(seed);
+        return cell;
+    }
 }
