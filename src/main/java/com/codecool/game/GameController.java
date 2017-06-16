@@ -16,8 +16,6 @@ public class GameController {
         do {
             ui.printBoard();
             int[] userMove = ui.getUserMove();
-            System.out.println(userMove[0]);
-            System.out.println(userMove[1]);
             game.updateGameState(game.getCurrentPlayer(), userMove[0], userMove[1]);
         } while (game.getCurrentState() == GameState.PLAYING);
         ui.printBoard();
