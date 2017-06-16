@@ -14,11 +14,7 @@ public class Game {
         board = new Board();
         board.init();
         currentState = GameState.PLAYING;
-        currentPlayer = choseRandomPlayer();
-    }
-
-    private void setCurrentState(GameState currentState) {
-        this.currentState = currentState;
+        currentPlayer = chooseRandomPlayer();
     }
 
     public void updateGameState(Seed seed, int row, int col) {
@@ -50,7 +46,11 @@ public class Game {
         }
     }
 
-    private Seed choseRandomPlayer() {
+    private void setCurrentState(GameState currentState) {
+        this.currentState = currentState;
+    }
+
+    private Seed chooseRandomPlayer() {
         List<Seed> seeds = Arrays.asList(Seed.CROSS, Seed.NOUGHT);
         return seeds.get(new Random().nextInt(seeds.size()));
     }
