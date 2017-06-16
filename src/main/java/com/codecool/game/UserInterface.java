@@ -44,9 +44,10 @@ public class UserInterface {
         System.out.println(
                 String.format("Player '%s', enter your move (row[1-3], column[1-3]): ",
                         seedAsString.get(game.getCurrentPlayer())));
-        String userMove = new Scanner(System. in).nextLine();
-        int row = Integer.valueOf(userMove.toCharArray()[0]);
-        int col = Integer.valueOf(userMove.toCharArray()[1]);
+        String userMove = new Scanner(System. in).nextLine().replaceAll("\\s","");
+        String[] tmp = userMove.split("");
+        int row = Integer.valueOf(tmp[0]);
+        int col = Integer.valueOf(tmp[1]);
         return  new int[]{row, col};
     }
 
@@ -56,5 +57,10 @@ public class UserInterface {
         seedAsString.put(Seed.NOUGHT, "O");
         seedAsString.put(Seed.EMPTY, " ");
         return  seedAsString;
+    }
+
+    public void displayWinner(Seed currentPlayer) {
+        System.out.println(String.format("Player '%s' won!",
+                seedAsString.get(currentPlayer)));
     }
 }
