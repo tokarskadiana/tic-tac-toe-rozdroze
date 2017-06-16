@@ -38,7 +38,7 @@ public class Game {
         return board;
     }
 
-    public void setCurrentPlayer() {
+    private void setCurrentPlayer() {
         if (getCurrentPlayer() == Seed.CROSS) {
             this.currentPlayer = Seed.NOUGHT;
         } else {
