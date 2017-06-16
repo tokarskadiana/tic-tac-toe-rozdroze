@@ -5,8 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -77,7 +75,7 @@ class TestBoard {
                     cells[i][j] = c;
                     when(c.getRow()).thenReturn(i);
                     when(c.getCol()).thenReturn(j);
-                    if ((i==1&&j==0)||(i==1&&j==1)||(i==1&&j==2)){
+                    if ((i == 1 && j == 0) || (i == 1 && j == 1) || (i == 1 && j == 2)) {
                         when(c.getContent()).thenReturn(Seed.CROSS);
                     } else {
                         when(c.getContent()).thenReturn(Seed.EMPTY);
@@ -98,7 +96,7 @@ class TestBoard {
                     cells[i][j] = c;
                     when(c.getRow()).thenReturn(i);
                     when(c.getCol()).thenReturn(j);
-                    if ((i==0&&j==1)||(i==1&&j==1)||(i==2&&j==1)){
+                    if ((i == 0 && j == 1) || (i == 1 && j == 1) || (i == 2 && j == 1)) {
                         when(c.getContent()).thenReturn(Seed.CROSS);
                     } else {
                         when(c.getContent()).thenReturn(Seed.EMPTY);
@@ -119,7 +117,7 @@ class TestBoard {
                     cells[i][j] = c;
                     when(c.getRow()).thenReturn(i);
                     when(c.getCol()).thenReturn(j);
-                    if ((i==0&&j==0)||(i==1&&j==1)||(i==2&&j==2)){
+                    if ((i == 0 && j == 0) || (i == 1 && j == 1) || (i == 2 && j == 2)) {
                         when(c.getContent()).thenReturn(Seed.CROSS);
                     } else {
                         when(c.getContent()).thenReturn(Seed.EMPTY);
@@ -145,7 +143,7 @@ class TestBoard {
                     cells[i][j] = c;
                     when(c.getRow()).thenReturn(i);
                     when(c.getCol()).thenReturn(j);
-                    if ((i==0&&j==2)||(i==1&&j==0)||(i==2&&j==1)||(i==2&&j==2)){
+                    if ((i == 0 && j == 2) || (i == 1 && j == 0) || (i == 2 && j == 1) || (i == 2 && j == 2)) {
                         when(c.getContent()).thenReturn(Seed.NOUGHT);
                     } else {
                         when(c.getContent()).thenReturn(Seed.CROSS);
