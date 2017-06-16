@@ -48,6 +48,12 @@ public class UserInterface {
         return userMove;
     }
 
+    public String getUserDecisionToPlayAgain() {
+        System.out.println("Do you want to play again? [y/n]");
+        String userDecisionToPlayAgain = new Scanner(System.in).nextLine().replaceAll("\\s", "");
+        return userDecisionToPlayAgain;
+    }
+
     private Map<Seed, String> seedsToSting() {
         Map<Seed, String> seedAsString = new HashMap<>();
         seedAsString.put(Seed.CROSS, "X");

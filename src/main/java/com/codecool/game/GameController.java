@@ -11,6 +11,16 @@ public class GameController {
     }
 
     public void runGame() {
+        boolean isPlay = false;
+        do {
+        playRound();
+            if (ui.getUserDecisionToPlayAgain().toLowerCase().equals("y")) {
+                isPlay = true;
+            }
+        } while (isPlay);
+    }
+
+    private void playRound() {
         game.initGame();
         ui.displayFirstPlayer();
         do {
